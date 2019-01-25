@@ -107,11 +107,19 @@ def custom_insert(input_list, index, value):
         >>> months == ['Jan', 'Feb', 'Mar']
         True
 
-    """
-    end_list = input_list[:(index+1)]
-    beg_list = input_list[(index-1):]
+    # """
+    # beg_list = input_list[:(index)]
+    # # # print(beg_list)
+    # end_list = input_list[(index):]
+    # # print(end_list)
 
-    input_list = beg_list + [value] + end_list
+    # input_list = input_list[:(index)] + [value] + input_list[(index):]
+    input_list[index:index] = [value]
+
+    # print(input_list)
+
+# months = ['Jan', 'Mar']
+# custom_insert(months, 1, 'Feb')
 
 
 def custom_remove(input_list, value):
@@ -129,9 +137,16 @@ def custom_remove(input_list, value):
         True
 
     """
+    index_counter = 0
+    for i in input_list:
+        if i == value:
+            input_list[index_counter:index_counter+1] = []
+            # print(input_list)
+            return
+        index_counter += 1
+    
 
-    pass
-
+# custom_remove([1, 2,3,2], 2)
 
 def custom_pop(input_list):
     """Remove the last item in the list and returns it.
@@ -148,8 +163,11 @@ def custom_pop(input_list):
         ['Jan', 'Feb']
 
     """
+    popped = input_list[-1]
+    del input_list[-1]
 
-    return None
+
+    return popped
 
 
 def custom_index(input_list, value):
@@ -165,7 +183,13 @@ def custom_index(input_list, value):
 
     """
 
-    return 0
+    index_counter = 0
+    for i in input_list:
+        if i == value:
+            return index_counter
+        index_counter += 1
+
+
 
 
 def custom_count(input_list, value):
@@ -181,8 +205,12 @@ def custom_count(input_list, value):
 
     """
 
-    return 0
+    counter = 0
+    for i in input_list:
+        if i == value:
+            counter += 1
 
+    return counter
 
 def custom_reverse(input_list):
     """Reverse the elements of the input_list.
@@ -199,8 +227,25 @@ def custom_reverse(input_list):
         True
 
     """
+    # input_list = input_list[::-1]
 
-    pass
+    # print(input_list) 
+
+    temp_list = input_list[::-1]
+
+    index = 0
+    for i in input_list:
+        input_list[index] = temp_list[index]
+        # temp = i
+        # input_list[index] = input_list[(index + 1) * -1]
+        # input_list[(index + 1) * -1] = temp
+        index += 1
+
+    # print(input_list)
+
+
+
+# custom_reverse([1, 2, 3, 4])
 
 
 def custom_contains(input_list, value):
@@ -220,7 +265,11 @@ def custom_contains(input_list, value):
 
     """
 
-    return None
+    for i in input_list:
+        if i == value:
+            return True
+
+    return False
 
 
 def custom_equality(some_list, another_list):
